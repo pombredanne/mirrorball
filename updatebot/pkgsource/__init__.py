@@ -35,6 +35,9 @@ def PackageSource(cfg, ui):
         return YumSource(cfg, ui)
     elif cfg.repositoryFormat == 'artifactory':
         return PomSource(cfg, ui)
+    elif cfg.repositoryFormat == 'pkgcache':
+        from updatebot.pkgsource.pkgcache import PkgCache
+        return PkgCache(cfg, ui)
     else:
         raise UnsupportedRepositoryError(repo=cfg.repositoryFormat,
                                          supported=['artifactory', 'yum'])
